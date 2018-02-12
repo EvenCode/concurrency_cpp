@@ -6,6 +6,7 @@
 #include <cstdlib>
 #include <thread>
 #include <mutex>
+#include <future>
 using namespace std;
 
 class generateQueue{
@@ -13,7 +14,7 @@ class generateQueue{
 		mutex mu;
 		queue <int> myQueue;
 	public:
-		void generateNumbers();
+		void generateNumbers(int &);
 		void fetchNumber(int &);
 		int const checkSize();
 };
