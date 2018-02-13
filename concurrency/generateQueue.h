@@ -14,7 +14,7 @@ class generateQueue{
 		mutex mu;
 		queue <int> myQueue;
 	public:
-		void generateNumbers(int &);
+		void generateNumbers(int &, int &, int &, int &);
 		void fetchNumber(int &);
 		int const checkSize();
 };

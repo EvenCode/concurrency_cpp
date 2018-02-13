@@ -8,11 +8,11 @@ using namespace std;
 
 int main()
 {
-	int bSum = 0, cSum = 0, signal = 0;
+	int bSum = 0, cSum = 0, signal = 0, deathNotice = 0;
 
 	generateQueue numbers;
 
-	thread start(&generateQueue::generateNumbers, &numbers, ref(signal));
+	thread start(&generateQueue::generateNumbers, &numbers, ref(signal), ref(bSum), ref(cSum), ref(deathNotice));
 
 	while(1){
 		if(numbers.checkSize() != 0)
@@ -25,6 +25,7 @@ int main()
 				c.join();
 		}
 		else if(signal == 1 && numbers.checkSize() == 0){
+			deathNotice = 1;
 			break;
 		}
 	}
@@ -32,12 +33,12 @@ int main()
 	if(start.joinable())
 		start.join();
 
-	if(bSum > cSum)
-		cout << "Thread B is the Winner" << endl;
-	else if(bSum < cSum)
-		cout << "Thread C is the Winner" << endl;
-	else
-		cout << "Its a Draw" << endl;
+	// if(bSum > cSum)
+	// 	cout << "Thread B is the Winner" << endl;
+	// else if(bSum < cSum)
+	// 	cout << "Thread C is the Winner" << endl;
+	// else
+	// 	cout << "Its a Draw" << endl;
 
 return 0;
 }
