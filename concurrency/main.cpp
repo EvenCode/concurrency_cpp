@@ -14,31 +14,18 @@ int main()
 
 	thread start(&generateQueue::generateNumbers, &numbers, ref(signal), ref(bSum), ref(cSum), ref(deathNotice));
 
-	while(1){
-		if(numbers.checkSize() != 0)
-		{
-			auto b = thread(&generateQueue::fetchNumber, &numbers, ref(bSum));
-			auto c = thread(&generateQueue::fetchNumber, &numbers, ref(cSum));
-			if(b.joinable())	
-				b.join();
-			if(c.joinable())	
-				c.join();
-		}
-		else if(signal == 1 && numbers.checkSize() == 0){
-			deathNotice = 1;
-			break;
-		}
-	}
+	thread b(&generateQueue::fetchNumber, &numbers, ref(bSum), ref(signal));
+	thread c(&generateQueue::fetchNumber, &numbers, ref(cSum), ref(signal));
+	
+	if(b.joinable())
+		b.join();
+	if(c.joinable())
+		c.join();
+	
+	// As both Threads finish deathNotice tells the Thread (start) that Sum can be compared; 
+	deathNotice = 1;
 
 	if(start.joinable())
 		start.join();
-
-	// if(bSum > cSum)
-	// 	cout << "Thread B is the Winner" << endl;
-	// else if(bSum < cSum)
-	// 	cout << "Thread C is the Winner" << endl;
-	// else
-	// 	cout << "Its a Draw" << endl;
-
 return 0;
 }

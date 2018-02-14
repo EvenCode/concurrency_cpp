@@ -15,7 +15,7 @@ class generateQueue{
 		queue <int> myQueue;
 	public:
 		void generateNumbers(int &, int &, int &, int &);
-		void fetchNumber(int &);
+		void fetchNumber(int &, int &);
 		int const checkSize();
 };
 
