@@ -11,11 +11,7 @@ void generateQueue :: generateNumbers(int & signal, int & bSum, int & cSum, int 
 	}
 	signal = 1;
 	while(deathNotice == 0){
-		if(deathNotice == 0)	
-			continue;
-		else{
-			break;
-		}
+		continue;
 	}
 
 	if(deathNotice == 1){
